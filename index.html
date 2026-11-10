@@ -886,6 +886,67 @@ body > footer{margin-top:auto;margin-bottom:0;}
   .hero-wa-btn:hover{background:var(--accent);border-color:var(--accent);}
 }
 </style>
+<style id="diseno-limpio">
+/* Diseño limpio: foto protagonista, tarjetas simples y un solo color de acento.
+   Los colores siguen saliendo de las variables que se cambian desde el admin. */
+
+/* Íconos propios (reemplazan a los emojis) */
+.ico{width:1.1em;height:1.1em;flex:none;vertical-align:-.18em;}
+.photo-nav-btn .ico{width:16px;height:16px;}
+.spotlight-close .ico,.lightbox-close .ico{width:18px;height:18px;vertical-align:middle;}
+.cb-icon .ico{width:22px;height:22px;vertical-align:middle;}
+.big-check .ico{width:46px;height:46px;color:var(--accent-ink);vertical-align:middle;}
+.card-photo .no-photo,
+.spotlight-photo .no-photo{color:color-mix(in srgb,var(--accent) 42%,#fff);display:flex;}
+.card-photo .no-photo .ico{width:46px;height:46px;}
+.spotlight-photo .no-photo .ico{width:60px;height:60px;}
+.empty-state .ico{display:block;width:38px;height:38px;margin:0 auto 12px;color:color-mix(in srgb,var(--accent) 42%,#fff);}
+.delivery-note .ico,.proof-upload-btn .ico{width:18px;height:18px;}
+.delivery-note .ico{margin-right:4px;}
+
+/* Portada: título en su forma normal y frase sencilla (sin letra a mano ni inclinación) */
+.hero h1{text-transform:none;font-style:normal;font-weight:500;letter-spacing:-.015em;color:var(--accent-ink);}
+.hero p.tagline{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+  font-size:clamp(1rem,3.6vw,1.15rem);color:var(--text);opacity:.75;transform:none;margin-top:4px;
+}
+
+/* Títulos de categoría: sobrios, sin subrayado de marcador */
+.cat-section h2{
+  display:block;margin:0 0 16px;padding:0;background:none;
+  font-size:clamp(1.35rem,4.6vw,1.7rem);font-weight:500;letter-spacing:-.01em;color:var(--accent-ink);
+}
+
+/* Tarjetas: la foto ocupa todo el ancho, borde fino y suave */
+.card{padding:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:none;}
+.card-photo{border:none;border-radius:0;}
+.card-photo img{border-radius:0;}
+.card-body{padding:12px 14px 14px;}
+.card-body h3{font-size:1rem;font-weight:500;}
+.card-body p.desc{font-size:.86rem;}
+.card-body .price{background:none;padding:0;font-size:1.2rem;}
+.badge,.badge.out{border:none;}
+.badge{font-size:.72rem;padding:4px 10px;}
+@media(hover:hover) and (pointer:fine){
+  .card.in:hover{transform:translateY(-2px);box-shadow:0 12px 26px -16px rgba(74,59,63,.4);}
+}
+@media(max-width:639px){.lbl-long{display:none;}}
+
+/* Producto compartido: mismo estilo, sin marcador en el precio, y sin quedar tapado por la barra de categorías */
+.spotlight-body .price{background:none;}
+.spotlight-wrap{scroll-margin-top:84px;}
+
+/* Pie de página liviano, con una línea arriba */
+footer{
+  background:transparent;color:var(--text);border-radius:0;border-top:1px solid var(--line);
+  width:100%;max-width:1100px;margin:56px auto 0;padding:28px 24px 30px;
+}
+body > footer{margin-top:auto;margin-left:auto;margin-right:auto;}
+footer .biz{color:var(--accent-ink);font-size:1.25rem;text-transform:none;}
+footer .meta{opacity:.7;}
+footer .socials a{color:var(--accent-ink);border-color:var(--line);}
+footer .legal-links,footer .legal-links a{color:var(--text) !important;opacity:.6 !important;}
+</style>
 </head>
 <body>
 
@@ -902,7 +963,7 @@ body > footer{margin-top:auto;margin-bottom:0;}
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.15.83.84-3.07-.2-.32a8.06 8.06 0 0 1-1.24-4.25c0-4.46 3.63-8.09 8.1-8.09 2.16 0 4.2.85 5.72 2.37a8.03 8.03 0 0 1 2.37 5.72c0 4.47-3.63 8.15-8.09 8.15z"/></svg>
         Escríbenos
       </a>
-      <button class="custom-order-btn" id="open-custom-order-btn">✨ Encargo especial</button>
+      <button class="custom-order-btn" id="open-custom-order-btn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg> Encargo especial</button>
     </div>
   </div>
 </div>
@@ -911,14 +972,14 @@ body > footer{margin-top:auto;margin-bottom:0;}
 
 <div class="closed-banner" id="closed-banner" style="display:none;">
   <div class="closed-banner-inner">
-    <span class="cb-icon">🧵</span> <span id="closed-message"></span>
+    <span class="cb-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span> <span id="closed-message"></span>
   </div>
 </div>
 
 <div class="spotlight-wrap" id="spotlight-wrap" style="display:none;">
   <div class="spotlight-label-row">
-    <div class="spotlight-label">✨ Te comparten esto</div>
-    <button class="spotlight-close" id="spotlight-close" title="Cerrar" aria-label="Cerrar producto destacado">✕</button>
+    <div class="spotlight-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg> Te comparten esto</div>
+    <button class="spotlight-close" id="spotlight-close" title="Cerrar" aria-label="Cerrar producto destacado"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="spotlight-card" id="spotlight-card"></div>
 </div>
@@ -939,7 +1000,7 @@ body > footer{margin-top:auto;margin-bottom:0;}
 </footer>
 
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen ampliada">✕</button>
+  <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen ampliada"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   <img id="lightbox-img" src="" alt="">
 </div>
 
@@ -986,6 +1047,11 @@ const DEMO_PRODUCTS = [
   { id:'p4', category_id:'c2', name:'Set 3 moñas pastel', description:'Combo de 3 moñas en tonos pastel surtidos.', price:20000, is_combo:true, in_stock:false, photos:[] },
   { id:'p5', category_id:'c3', name:'Vincha perlas', description:'Vincha delicada con detalle de perlas.', price:12000, is_combo:false, in_stock:true, photos:[] }
 ];
+
+const ICONS = {"bow": "<path d=\"M12 12c-2.5-3.5-6-5-8.5-3.8-1.6.8-1.4 3.9 0 5.1C6 15.5 9.5 14.5 12 12z\"/><path d=\"M12 12c2.5-3.5 6-5 8.5-3.8 1.6.8 1.4 3.9 0 5.1C18 15.5 14.5 14.5 12 12z\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\"/><path d=\"M11 13.5L9 19M13 13.5L15 19\"/>", "sparkle": "<path d=\"M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "truck": "<path d=\"M3 6h11v10H3z\"/><path d=\"M14 9h4l3 3v4h-7\"/><circle cx=\"7.5\" cy=\"17.5\" r=\"1.8\"/><circle cx=\"17.5\" cy=\"17.5\" r=\"1.8\"/>", "clip": "<path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"/>", "checkCircle": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 12.5l2.7 2.7L16 9.5\"/>", "x": "<path d=\"M18 6L6 18M6 6l12 12\"/>", "chevL": "<path d=\"M15 5l-7 7 7 7\"/>", "chevR": "<path d=\"M9 5l7 7-7 7\"/>"};
+function icon(name){
+  return '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
+}
 
 function money(n){
   return '$' + Number(n).toLocaleString('es-CO');
@@ -1159,7 +1225,7 @@ function renderSpotlight(){
 
   card.innerHTML = `
     <div class="spotlight-photo">
-      ${photoUrl ? `<img src="${photoUrl}" alt="${escapeHtml(p.name)}">` : '<span class="no-photo">🌸</span>'}
+      ${photoUrl ? `<img src="${photoUrl}" alt="${escapeHtml(p.name)}">` : '<span class="no-photo">' + icon('bow') + '</span>'}
       ${isLowStock ? `<span class="badge low-stock" style="position:absolute;top:8px;left:8px;">¡Solo quedan ${p.stock_quantity}!</span>` : ''}
     </div>
     <div class="spotlight-body">
@@ -1215,7 +1281,7 @@ function renderCatalog(categories, products){
   });
 
   if(visibleWithItems.length === 0){
-    catalog.innerHTML = '<div class="empty-state">Muy pronto verás productos por aquí 🌷</div>';
+    catalog.innerHTML = '<div class="empty-state">' + icon('bow') + 'Muy pronto verás productos por aquí</div>';
   }
 }
 
@@ -1256,7 +1322,7 @@ function renderCard(p){
     if(photos.length === 0){
       const span = document.createElement('span');
       span.className = 'no-photo';
-      span.textContent = '🌸';
+      span.innerHTML = icon('bow');
       photo.appendChild(span);
       return;
     }
@@ -1271,7 +1337,7 @@ function renderCard(p){
     if(photos.length > 1){
       const prevBtn = document.createElement('button');
       prevBtn.className = 'photo-nav-btn prev';
-      prevBtn.textContent = '‹';
+      prevBtn.innerHTML = icon('chevL');
       prevBtn.setAttribute('aria-label', 'Foto anterior');
       prevBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1281,7 +1347,7 @@ function renderCard(p){
 
       const nextBtn = document.createElement('button');
       nextBtn.className = 'photo-nav-btn next';
-      nextBtn.textContent = '›';
+      nextBtn.innerHTML = icon('chevR');
       nextBtn.setAttribute('aria-label', 'Foto siguiente');
       nextBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1344,7 +1410,7 @@ function renderCard(p){
   btn.target = '_blank';
   btn.innerHTML = `
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.15.83.84-3.07-.2-.32a8.06 8.06 0 0 1-1.24-4.25c0-4.46 3.63-8.09 8.1-8.09 2.16 0 4.2.85 5.72 2.37a8.03 8.03 0 0 1 2.37 5.72c0 4.47-3.63 8.15-8.09 8.15z"/></svg>
-    ${p.in_stock ? (CONFIG.is_open ? 'Pedir por WhatsApp' : 'Tienda cerrada') : 'Agotado por ahora'}
+    ${p.in_stock ? (CONFIG.is_open ? '<span class="lbl-long">Pedir por </span>WhatsApp' : 'Tienda cerrada') : 'Agotado por ahora'}
   `;
 
   body.appendChild(btn);
@@ -1416,7 +1482,7 @@ function deliveryAndPaymentFieldsHTML(){
       </select>
     </div>
     <div class="delivery-note" id="om-delivery-note">
-      🚚 El envío se confirma por WhatsApp según tu zona: si quedas muy cerca es gratis, si es más lejos puede tener un costo adicional.
+      ${icon('truck')} El envío se confirma por WhatsApp según tu zona: si quedas muy cerca es gratis, si es más lejos puede tener un costo adicional.
     </div>
     <div class="field">
       <label>Dirección</label>
@@ -1431,7 +1497,7 @@ function deliveryAndPaymentFieldsHTML(){
       <div class="nq-number" id="om-nequi-number"></div>
       <p id="om-nequi-holder" style="margin-bottom:6px;"></p>
       <p>Haz la transferencia y sube aquí una foto del comprobante.</p>
-      <button type="button" class="proof-upload-btn" id="om-proof-btn">📎 Subir comprobante</button>
+      <button type="button" class="proof-upload-btn" id="om-proof-btn">${icon('clip')} Subir comprobante</button>
       <input type="file" id="om-proof-input" accept="image/*" style="display:none">
       <div id="om-proof-preview"></div>
     </div>
@@ -1593,7 +1659,7 @@ function openOrderModal(p){
 
     content.innerHTML = `
       <div class="order-confirm">
-        <div class="big-check">🌸</div>
+        <div class="big-check">${icon('checkCircle')}</div>
         <h3>¡Pedido recibido!</h3>
         <p style="font-size:.9rem; opacity:.75; margin-top:6px;">Ahora escríbenos por WhatsApp para confirmar los detalles.</p>
         <div class="om-actions" style="margin-top:18px;">
@@ -1706,7 +1772,7 @@ function openCustomOrderModal(){
 
     content.innerHTML = `
       <div class="order-confirm">
-        <div class="big-check">✨</div>
+        <div class="big-check">${icon('sparkle')}</div>
         <h3>¡Encargo recibido!</h3>
         <p style="font-size:.9rem; opacity:.75; margin-top:6px;">Ahora escríbenos por WhatsApp para confirmar los detalles.</p>
         <div class="om-actions" style="margin-top:18px;">
