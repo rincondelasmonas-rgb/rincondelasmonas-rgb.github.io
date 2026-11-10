@@ -857,6 +857,35 @@ body > footer{margin-top:auto;margin-bottom:0;}
   .card.reveal.in{animation:none;}
 }
 </style>
+<style id="portada-compacta">
+/* Portada compacta: franja corta (nombre, frase y 2 botones) y los productos a la vista de una vez */
+.hero{padding:22px 20px 14px;overflow:visible;}
+.hero-deco{display:none !important;}
+.hero .deco-line{display:none;}
+.hero-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+.hero h1{font-size:clamp(1.9rem,8vw,2.6rem);line-height:1.05;margin:0;}
+.hero p.tagline{margin-top:4px;font-size:clamp(1.25rem,5vw,1.6rem);}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}
+.hero .custom-order-btn,
+.hero-wa-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;margin:0;padding:10px 20px;border-radius:999px;
+  font-size:.92rem;font-weight:700;text-decoration:none;
+  transition:transform 160ms var(--ease-out),background-color 160ms ease;
+}
+.hero-wa-btn{background:var(--accent-ink);color:#fff;border:1.5px solid var(--accent-ink);}
+.hero-wa-btn svg{width:18px;height:18px;flex:none;}
+.hero-wa-btn:active{transform:scale(.97);}
+.cat-nav{margin-bottom:22px;}
+@media(min-width:800px){
+  .hero{padding:28px 32px 18px;}
+  .hero-inner{flex-direction:row;justify-content:space-between;align-items:center;text-align:left;gap:24px;}
+  .hero-actions{flex-wrap:nowrap;justify-content:flex-end;}
+}
+@media(hover:hover) and (pointer:fine){
+  .hero-wa-btn:hover{background:var(--accent);border-color:var(--accent);}
+}
+</style>
 </head>
 <body>
 
@@ -864,10 +893,17 @@ body > footer{margin-top:auto;margin-bottom:0;}
   <div class="hero-deco deco-1" id="hero-deco-1"></div>
   <div class="hero-deco deco-2" id="hero-deco-2"></div>
   <div class="hero-inner">
-    <h1 id="biz-name">Rincón de las Moñas</h1>
-    <p class="tagline" id="biz-tagline">Hecho a mano con amor</p>
-    <div class="deco-line"></div>
-    <button class="custom-order-btn" id="open-custom-order-btn">✨ Hacer un encargo especial</button>
+    <div class="hero-text">
+      <h1 id="biz-name">Rincón de las Moñas</h1>
+      <p class="tagline" id="biz-tagline">Hecho a mano con amor</p>
+    </div>
+    <div class="hero-actions">
+      <a class="hero-wa-btn" id="hero-wa-btn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.15.83.84-3.07-.2-.32a8.06 8.06 0 0 1-1.24-4.25c0-4.46 3.63-8.09 8.1-8.09 2.16 0 4.2.85 5.72 2.37a8.03 8.03 0 0 1 2.37 5.72c0 4.47-3.63 8.15-8.09 8.15z"/></svg>
+        Escríbenos
+      </a>
+      <button class="custom-order-btn" id="open-custom-order-btn">✨ Encargo especial</button>
+    </div>
   </div>
 </div>
 
@@ -1024,6 +1060,16 @@ function applyConfig(cfg){
     socials.appendChild(a);
   }
 
+  const heroWa = document.getElementById('hero-wa-btn');
+  if(heroWa){
+    if(CONFIG.whatsapp_number){
+      heroWa.href = waLink(CONFIG.whatsapp_number, `Hola, quiero más información sobre ${CONFIG.business_name} 🌸`);
+      heroWa.style.display = '';
+    } else {
+      heroWa.style.display = 'none';
+    }
+  }
+
   const banner = document.getElementById('closed-banner');
   const customOrderBtn = document.getElementById('open-custom-order-btn');
   if(!CONFIG.is_open){
@@ -1109,7 +1155,7 @@ function renderSpotlight(){
   const card = document.getElementById('spotlight-card');
   const photoUrl = (p.photos && p.photos[0]) ? p.photos[0] : null;
   const canOrder = p.in_stock && CONFIG.is_open;
-  const isLowStock = p.in_stock && (p.stock_quantity ?? 1) > 0 && (p.stock_quantity ?? 1) <= (CONFIG.low_stock_threshold ?? 3);
+  const isLowStock = p.in_stock && p.stock_quantity != null && p.stock_quantity > 0 && p.stock_quantity <= (CONFIG.low_stock_threshold ?? 3);
 
   card.innerHTML = `
     <div class="spotlight-photo">
@@ -1264,7 +1310,7 @@ function renderCard(p){
   }
   paintPhoto();
 
-  const isLowStock = p.in_stock && (p.stock_quantity ?? 1) > 0 && (p.stock_quantity ?? 1) <= (CONFIG.low_stock_threshold ?? 3);
+  const isLowStock = p.in_stock && p.stock_quantity != null && p.stock_quantity > 0 && p.stock_quantity <= (CONFIG.low_stock_threshold ?? 3);
 
   if(p.is_combo){
     const b = document.createElement('span');
