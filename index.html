@@ -936,6 +936,12 @@ body > footer{margin-top:auto;margin-bottom:0;}
 .spotlight-body .price{background:none;}
 .spotlight-wrap{scroll-margin-top:84px;}
 
+/* Botones siempre alineados abajo, aunque el nombre ocupe 1 o 2 líneas */
+.card{display:flex;flex-direction:column;}
+.card-body{flex:1;display:flex;flex-direction:column;}
+.card-body .price{margin-bottom:12px;}
+.card-body .wa-btn{margin-top:auto;}
+
 /* Pie de página liviano, con una línea arriba */
 footer{
   background:transparent;color:var(--text);border-radius:0;border-top:1px solid var(--line);
@@ -1550,7 +1556,6 @@ function renderCard(p){
   body.className = 'card-body';
   body.innerHTML = `
     <h3>${escapeHtml(p.name)}</h3>
-    ${p.description ? `<p class="desc">${escapeHtml(p.description)}</p>` : ''}
     <div class="price">${money(p.price)}</div>
   `;
 
