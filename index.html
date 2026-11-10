@@ -947,8 +947,108 @@ footer .meta{opacity:.7;}
 footer .socials a{color:var(--accent-ink);border-color:var(--line);}
 footer .legal-links,footer .legal-links a{color:var(--text) !important;opacity:.6 !important;}
 </style>
+<style id="referencias">
+/* Ideas tomadas de las 3 referencias:
+   - Menta Rosa: barra de aviso arriba, cantidad de productos por categoría, pie en columnas
+   - Moños Dimalu: etiqueta "Nuevo", bloque de presentación con botones de WhatsApp
+   - Faire: ficha de producto con galería, etiquetas y datos de entrega */
+
+/* Barra de aviso (Menta Rosa) */
+.topbar{background:var(--accent-ink);color:#fff;text-align:center;font-size:.8rem;font-weight:700;letter-spacing:.02em;padding:8px 16px;}
+
+/* Categoría con cantidad de productos */
+.cat-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.cat-head h2{margin:0;}
+.cat-count{font-size:.82rem;opacity:.6;white-space:nowrap;font-weight:600;}
+
+/* Etiqueta "Nuevo" (Dimalu) */
+.badge.new{background:var(--accent-ink);color:#fff;}
+
+/* Cómo pedir (presentación breve al final, estilo bloque de marca de Dimalu) */
+.catalog{padding-bottom:32px !important;}
+.how{width:100%;max-width:1100px;margin:0 auto;padding:8px 20px 0;}
+.how-title{font-size:clamp(1.35rem,4.6vw,1.7rem);font-weight:500;letter-spacing:-.01em;color:var(--accent-ink);margin-bottom:16px;}
+.how-steps{display:grid;grid-template-columns:1fr;gap:12px;}
+.how-step{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;}
+.how-step h3{font-size:1.05rem;font-weight:500;margin-bottom:2px;}
+.how-step p{font-size:.9rem;opacity:.78;line-height:1.5;}
+.how-num{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--primary) 55%,#fff);color:var(--accent-ink);font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
+.how-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+.btn-solid,.btn-line{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 22px;border-radius:999px;
+  font-family:inherit;font-weight:700;font-size:.92rem;text-decoration:none;cursor:pointer;
+  transition:transform 160ms var(--ease-out),background-color 160ms ease;
+}
+.btn-solid{background:var(--accent-ink);color:#fff;border:1.5px solid var(--accent-ink);}
+.btn-solid svg{width:18px;height:18px;flex:none;}
+.btn-line{background:#fff;color:var(--accent-ink);border:1.5px solid var(--accent-ink);}
+.btn-solid:active,.btn-line:active{transform:scale(.97);}
+@media(min-width:700px){.how-steps{grid-template-columns:repeat(3,1fr);}}
+@media(hover:hover) and (pointer:fine){
+  .btn-solid:hover{background:var(--accent);border-color:var(--accent);}
+  .btn-line:hover{background:var(--primary);}
+}
+
+/* Pie en columnas (Menta Rosa) */
+footer{text-align:left;}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:700px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:32px;}}
+.foot-title{font-weight:800;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px;}
+footer .meta{margin-top:6px;}
+footer .socials{margin-top:0;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;}
+footer .socials a{border:none;padding:0;min-height:32px;color:var(--text);font-weight:600;font-size:.92rem;}
+footer .legal-links{margin-top:0 !important;display:flex;flex-direction:column;gap:6px;font-size:.92rem !important;opacity:1 !important;}
+footer .legal-links a{display:inline-flex;align-items:center;min-height:32px;color:var(--text) !important;opacity:1 !important;font-weight:600;text-decoration:none;}
+.foot-copy{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:.8rem;opacity:.6;}
+@media(hover:hover) and (pointer:fine){
+  footer .socials a:hover,footer .legal-links a:hover{color:var(--accent-ink) !important;text-decoration:underline;}
+}
+
+/* Ficha de producto (Faire): galería grande, etiquetas y datos de entrega */
+.card-photo img,.card-body h3{cursor:pointer;}
+.pd-overlay{position:fixed;inset:0;background:rgba(74,59,63,.6);display:none;align-items:flex-end;justify-content:center;z-index:95;}
+.pd-overlay.open{display:flex;animation:fade-in 200ms ease-out;}
+.pd{position:relative;display:grid;grid-template-columns:1fr;width:100%;max-width:920px;max-height:92dvh;overflow-y:auto;
+  background:var(--bg);border-radius:26px 26px 0 0;overscroll-behavior:contain;}
+.pd-overlay.open .pd{animation:sheet-up 300ms var(--ease-sheet);}
+@media(min-width:760px){
+  .pd-overlay{align-items:center;padding:24px;}
+  .pd{grid-template-columns:1.05fr 1fr;border-radius:26px;}
+  .pd-overlay.open .pd{animation:pop-in 220ms var(--ease-out);}
+}
+.pd-close{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#fff;border:1px solid var(--line);color:var(--text);cursor:pointer;box-shadow:0 2px 8px rgba(74,59,63,.15);}
+.pd-close .ico{width:18px;height:18px;}
+.pd-gallery{background:color-mix(in srgb,var(--primary) 14%,#fff);}
+.pd-main{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;color:color-mix(in srgb,var(--accent) 42%,#fff);}
+.pd-main img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;}
+.pd-main .ico{width:84px;height:84px;}
+.pd-thumbs{display:flex;gap:8px;padding:10px 12px;overflow-x:auto;background:var(--bg);scrollbar-width:none;}
+.pd-thumbs::-webkit-scrollbar{display:none;}
+.pd-thumbs button{flex:0 0 64px;width:64px;height:64px;padding:0;overflow:hidden;border-radius:12px;background:#fff;border:2px solid transparent;cursor:pointer;}
+.pd-thumbs button.active{border-color:var(--accent-ink);}
+.pd-thumbs img{width:100%;height:100%;object-fit:cover;display:block;}
+.pd-info{padding:20px 22px 26px;display:flex;flex-direction:column;gap:10px;}
+.pd-info h3{font-size:1.55rem;font-weight:500;line-height:1.2;text-wrap:balance;}
+.pd-info .price{font-family:'Fraunces',serif;font-size:1.65rem;font-weight:600;color:var(--accent-ink);font-variant-numeric:tabular-nums lining-nums;}
+.pd-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.pd-chip{font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:999px;background:var(--primary);color:var(--accent-ink);}
+.pd-chip.soft{background:transparent;border:1px solid var(--line);color:var(--text);font-weight:700;}
+.pd-chip.out{background:#eee;color:#777;}
+.pd-chip.low{background:#FFE8CC;color:#B5680B;}
+.pd-desc{font-size:.96rem;line-height:1.6;opacity:.85;}
+.pd-facts{list-style:none;display:flex;flex-direction:column;gap:10px;padding:14px 0;margin:4px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.88rem;line-height:1.45;}
+.pd-facts li{display:flex;gap:10px;align-items:flex-start;}
+.pd-facts .ico{width:18px;height:18px;margin-top:1px;color:var(--accent-ink);}
+.pd-actions{display:flex;flex-direction:column;gap:8px;}
+.pd-actions .wa-btn{margin-top:0;}
+@media(prefers-reduced-motion:reduce){.pd-overlay.open .pd{animation:none;}}
+</style>
 </head>
 <body>
+
+<div class="topbar"><span id="topbar-text">Pedidos por WhatsApp</span></div>
 
 <div class="hero">
   <div class="hero-deco deco-1" id="hero-deco-1"></div>
@@ -988,20 +1088,47 @@ footer .legal-links,footer .legal-links a{color:var(--text) !important;opacity:.
   <div class="loading">Cargando catálogo…</div>
 </main>
 
-<footer>
-  <div class="biz" id="footer-biz">Rincón de las Moñas</div>
-  <div class="meta" id="footer-meta">Entrega en persona en Barranquilla</div>
-  <div class="socials" id="footer-socials"></div>
-  <div class="legal-links" style="margin-top:16px; font-size:.75rem; opacity:.6;">
-    <a href="politica-privacidad.html" style="color:inherit;">Política de privacidad</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="terminos-condiciones.html" style="color:inherit;">Términos y condiciones</a>
+<section class="how" id="how">
+  <h2 class="how-title">Cómo pedir</h2>
+  <div class="how-steps">
+    <div class="how-step"><span class="how-num">1</span><div><h3>Escoge</h3><p>Mira el catálogo y elige lo que más te guste. Toca una foto para verla más grande.</p></div></div>
+    <div class="how-step"><span class="how-num">2</span><div><h3>Pide</h3><p>Toca «Hacer pedido» o escríbenos directo por WhatsApp.</p></div></div>
+    <div class="how-step"><span class="how-num">3</span><div><h3>Coordinamos</h3><p>Confirmamos por WhatsApp la disponibilidad, el pago y la entrega: lo recoges o te lo llevamos.</p></div></div>
   </div>
+  <div class="how-cta">
+    <a class="btn-solid" id="how-wa-btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.15.83.84-3.07-.2-.32a8.06 8.06 0 0 1-1.24-4.25c0-4.46 3.63-8.09 8.1-8.09 2.16 0 4.2.85 5.72 2.37a8.03 8.03 0 0 1 2.37 5.72c0 4.47-3.63 8.15-8.09 8.15z"/></svg> Escríbenos</a>
+    <button type="button" class="btn-line" id="how-custom-btn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg> ¿Algo distinto? Haz un encargo</button>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="biz" id="footer-biz">Rincón de las Moñas</div>
+      <div class="meta" id="footer-meta">Entrega en persona en Barranquilla</div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-title">Contacto</div>
+      <div class="socials" id="footer-socials"></div>
+    </div>
+    <div class="foot-col">
+      <div class="foot-title">Información</div>
+      <div class="legal-links">
+        <a href="politica-privacidad.html">Política de privacidad</a>
+        <a href="terminos-condiciones.html">Términos y condiciones</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-copy" id="footer-copy">Rincón de las Moñas</div>
 </footer>
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen ampliada"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   <img id="lightbox-img" src="" alt="">
+</div>
+
+<div class="pd-overlay" id="pd-overlay" role="dialog" aria-modal="true" aria-label="Detalle del producto">
+  <div class="pd" id="pd-content"></div>
 </div>
 
 <div class="order-modal-overlay" id="order-modal-overlay">
@@ -1049,6 +1176,8 @@ const DEMO_PRODUCTS = [
 ];
 
 const ICONS = {"bow": "<path d=\"M12 12c-2.5-3.5-6-5-8.5-3.8-1.6.8-1.4 3.9 0 5.1C6 15.5 9.5 14.5 12 12z\"/><path d=\"M12 12c2.5-3.5 6-5 8.5-3.8 1.6.8 1.4 3.9 0 5.1C18 15.5 14.5 14.5 12 12z\"/><circle cx=\"12\" cy=\"12\" r=\"1.6\"/><path d=\"M11 13.5L9 19M13 13.5L15 19\"/>", "sparkle": "<path d=\"M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "truck": "<path d=\"M3 6h11v10H3z\"/><path d=\"M14 9h4l3 3v4h-7\"/><circle cx=\"7.5\" cy=\"17.5\" r=\"1.8\"/><circle cx=\"17.5\" cy=\"17.5\" r=\"1.8\"/>", "clip": "<path d=\"M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48\"/>", "checkCircle": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 12.5l2.7 2.7L16 9.5\"/>", "x": "<path d=\"M18 6L6 18M6 6l12 12\"/>", "chevL": "<path d=\"M15 5l-7 7 7 7\"/>", "chevR": "<path d=\"M9 5l7 7-7 7\"/>"};
+ICONS.chat = '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>';
+const WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.48 1.32 4.99L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.06c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.15.83.84-3.07-.2-.32a8.06 8.06 0 0 1-1.24-4.25c0-4.46 3.63-8.09 8.1-8.09 2.16 0 4.2.85 5.72 2.37a8.03 8.03 0 0 1 2.37 5.72c0 4.47-3.63 8.15-8.09 8.15z"/></svg>';
 function icon(name){
   return '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
 }
@@ -1133,6 +1262,20 @@ function applyConfig(cfg){
       heroWa.style.display = '';
     } else {
       heroWa.style.display = 'none';
+    }
+  }
+
+  const tb = document.getElementById('topbar-text');
+  if(tb) tb.textContent = 'Pedidos por WhatsApp · Entrega en persona en ' + CONFIG.city;
+  const fc = document.getElementById('footer-copy');
+  if(fc) fc.textContent = '© ' + new Date().getFullYear() + ' ' + CONFIG.business_name + ' · Hecho a mano con amor';
+  const howWa = document.getElementById('how-wa-btn');
+  if(howWa){
+    if(CONFIG.whatsapp_number){
+      howWa.href = waLink(CONFIG.whatsapp_number, `Hola, quiero más información sobre ${CONFIG.business_name} 🌸`);
+      howWa.style.display = '';
+    } else {
+      howWa.style.display = 'none';
     }
   }
 
@@ -1266,7 +1409,7 @@ function renderCatalog(categories, products){
 
     const section = document.createElement('section');
     section.className = 'cat-section has-season-divider';
-    section.innerHTML = `<h2>${cat.name}</h2>`;
+    section.innerHTML = `<div class="cat-head"><h2>${cat.name}</h2><span class="cat-count">${items.length} ${items.length === 1 ? 'producto' : 'productos'}</span></div>`;
     const grid = document.createElement('div');
     grid.className = 'grid';
 
@@ -1331,7 +1474,6 @@ function renderCard(p){
     img.src = photos[idx];
     img.alt = p.name;
     img.loading = 'lazy';
-    img.onclick = () => openLightbox(photos[idx], p.name);
     photo.appendChild(img);
 
     if(photos.length > 1){
@@ -1375,6 +1517,10 @@ function renderCard(p){
     }
   }
   paintPhoto();
+  photo.addEventListener('click', (e) => {
+    if(e.target.closest('button')) return;
+    openProductDetail(p, cardPhotoIndex[p.id] || 0);
+  });
 
   const isLowStock = p.in_stock && p.stock_quantity != null && p.stock_quantity > 0 && p.stock_quantity <= (CONFIG.low_stock_threshold ?? 3);
 
@@ -1393,6 +1539,11 @@ function renderCard(p){
     b.className = 'badge low-stock';
     b.textContent = `¡Solo quedan ${p.stock_quantity}!`;
     photo.appendChild(b);
+  } else if(p.created_at && (Date.now() - Date.parse(p.created_at)) < 14 * 24 * 3600 * 1000){
+    const b = document.createElement('span');
+    b.className = 'badge new';
+    b.textContent = 'Nuevo';
+    photo.appendChild(b);
   }
 
   const body = document.createElement('div');
@@ -1402,6 +1553,12 @@ function renderCard(p){
     ${p.description ? `<p class="desc">${escapeHtml(p.description)}</p>` : ''}
     <div class="price">${money(p.price)}</div>
   `;
+
+  const titleEl = body.querySelector('h3');
+  if(titleEl){
+    titleEl.style.cursor = 'pointer';
+    titleEl.onclick = () => openProductDetail(p, cardPhotoIndex[p.id] || 0);
+  }
 
   const btn = document.createElement('a');
   const canOrder = p.in_stock && CONFIG.is_open;
@@ -1426,6 +1583,94 @@ function renderCard(p){
   card.appendChild(photo);
   card.appendChild(body);
   return card;
+}
+
+function closeProductDetail(){
+  const ov = document.getElementById('pd-overlay');
+  if(!ov || !ov.classList.contains('open')) return;
+  ov.classList.remove('open');
+  document.documentElement.style.overflow = '';
+}
+
+function openProductDetail(p, startIdx){
+  const overlay = document.getElementById('pd-overlay');
+  const box = document.getElementById('pd-content');
+  const photos = (p.photos && p.photos.length) ? p.photos : [];
+  let idx = Math.min(Math.max(startIdx || 0, 0), Math.max(photos.length - 1, 0));
+  const canOrder = p.in_stock && CONFIG.is_open;
+  const isLow = p.in_stock && p.stock_quantity != null && p.stock_quantity > 0 && p.stock_quantity <= (CONFIG.low_stock_threshold ?? 3);
+
+  const chips = [];
+  if(p.is_combo) chips.push('<span class="pd-chip">Combo</span>');
+  if(!p.in_stock) chips.push('<span class="pd-chip out">Agotado</span>');
+  else if(isLow) chips.push(`<span class="pd-chip low">¡Solo quedan ${p.stock_quantity}!</span>`);
+  chips.push('<span class="pd-chip soft">Hecho a mano</span>');
+
+  box.innerHTML = `
+    <button type="button" class="pd-close" id="pd-close" aria-label="Cerrar">${icon('x')}</button>
+    <div class="pd-gallery">
+      <div class="pd-main" id="pd-main"></div>
+      <div class="pd-thumbs" id="pd-thumbs"></div>
+    </div>
+    <div class="pd-info">
+      <div class="pd-chips">${chips.join('')}</div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <div class="price">${money(p.price)}</div>
+      ${p.description ? `<p class="pd-desc">${escapeHtml(p.description)}</p>` : ''}
+      <ul class="pd-facts">
+        <li>${icon('truck')}<span>Entrega en persona en ${escapeHtml(CONFIG.city)}. El domicilio se confirma por WhatsApp según tu zona.</span></li>
+        <li>${icon('chat')}<span>Confirmamos disponibilidad, pago y entrega por WhatsApp.</span></li>
+      </ul>
+      <div class="pd-actions" id="pd-actions"></div>
+    </div>
+  `;
+
+  const main = box.querySelector('#pd-main');
+  const thumbs = box.querySelector('#pd-thumbs');
+  function paint(){
+    if(!photos.length){
+      main.innerHTML = icon('bow');
+      thumbs.style.display = 'none';
+      return;
+    }
+    main.innerHTML = `<img src="${photos[idx]}" alt="${escapeHtml(p.name)}">`;
+    main.querySelector('img').onclick = () => openLightbox(photos[idx], p.name);
+    if(photos.length < 2){ thumbs.style.display = 'none'; return; }
+    thumbs.innerHTML = '';
+    photos.forEach((u, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = i === idx ? 'active' : '';
+      b.setAttribute('aria-label', `Ver foto ${i + 1}`);
+      b.innerHTML = `<img src="${u}" alt="">`;
+      b.onclick = () => { idx = i; paint(); };
+      thumbs.appendChild(b);
+    });
+  }
+  paint();
+
+  const actions = box.querySelector('#pd-actions');
+  const wa = document.createElement('a');
+  wa.className = 'wa-btn' + (canOrder ? '' : ' disabled');
+  wa.href = canOrder ? productWaLink(p) : '#';
+  wa.target = '_blank';
+  wa.rel = 'noopener';
+  wa.innerHTML = WA_SVG + (p.in_stock ? (CONFIG.is_open ? 'Pedir por WhatsApp' : 'Tienda cerrada') : 'Agotado por ahora');
+  actions.appendChild(wa);
+  if(canOrder){
+    const ob = document.createElement('button');
+    ob.type = 'button';
+    ob.className = 'order-btn';
+    ob.textContent = 'Hacer pedido';
+    ob.onclick = () => { closeProductDetail(); openOrderModal(p); };
+    actions.appendChild(ob);
+  }
+
+  box.querySelector('#pd-close').onclick = closeProductDetail;
+  overlay.onclick = (e) => { if(e.target === overlay) closeProductDetail(); };
+  overlay.classList.add('open');
+  document.documentElement.style.overflow = 'hidden';
+  box.scrollTop = 0;
 }
 
 function escapeHtml(s){
@@ -1795,6 +2040,8 @@ document.getElementById('open-custom-order-btn').onclick = () => {
   openCustomOrderModal();
 };
 
+document.getElementById('how-custom-btn').onclick = () => document.getElementById('open-custom-order-btn').click();
+
 document.getElementById('order-modal-overlay').onclick = (e) => {
   if(e.target.id === 'order-modal-overlay') e.target.classList.remove('open');
 };
@@ -1803,6 +2050,7 @@ document.addEventListener('keydown', (e) => {
   if(e.key === 'Escape'){
     document.getElementById('order-modal-overlay').classList.remove('open');
     document.getElementById('lightbox').classList.remove('open');
+    closeProductDetail();
   }
 });
 
